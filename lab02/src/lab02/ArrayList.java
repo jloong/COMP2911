@@ -71,8 +71,7 @@ public class ArrayList implements List
 	
 	public Object remove ()
 	{
-		if (size == 0)
-			throw new IllegalStateException ("empty list");
+		if (size == 0) throw new IllegalStateException ("empty list");
 		size--;
 		return items [size];
 	}
