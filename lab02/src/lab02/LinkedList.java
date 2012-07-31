@@ -44,17 +44,12 @@ public class LinkedList implements List
 	public Object getLast ()
 	{
 		if (size == 0) throw new IllegalStateException("empty list");
-		//Link current = first;
-		//for (int i = 0; i < size-1; ++i) {
-		//	current = current.getNext ();
-		//}
 		return first.getItem();
 	}
 	
 	public Object remove ()
 	{
-		if (size == 0)
-			throw new IllegalStateException ("empty list");
+		if (size == 0) throw new IllegalStateException ("empty list");
 		Link current = first;
 		first = first.getNext();
 		size--;
