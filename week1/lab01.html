@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta name="Format" content="complete" />
+	</head>
+<body>
+<h1 id="comp2911engineeringdesignincomputing"><strong>COMP2911</strong> Engineering Design in Computing</h1>
+
+<h2 id="laboratory-week1">Laboratory - Week 1</h2>
+
+<hr />
+
+<h3 id="exercise1:helloworld">Exercise 1: Hello World</h3>
+
+<h4 id="hello.java">Hello.java</h4>
+
+<pre><code>public class Hello {
+    public static void main (String[] args) {
+        System.out.println("Hello World!");
+    }
+}
+</code></pre>
+
+<h4 id="javaphello">javap Hello</h4>
+
+<pre><code>Compiled from "Hello.java"
+public class Hello extends java.lang.Object{
+    public Hello();
+    public static void main(java.lang.String[]);
+}
+</code></pre>
+
+<h4 id="javap-chello">javap -c Hello</h4>
+
+<pre><code>Compiled from "Hello.java"
+public class Hello extends java.lang.Object{
+public Hello();
+  Code:
+   0:   aload_0
+   1:   invokespecial   #1; //Method java/lang/Object."&lt;init&gt;":()V
+   4:   return
+
+public static void main(java.lang.String[]);
+  Code:
+   0:   getstatic   #2; //Field java/lang/System.out:Ljava/io/PrintStream;
+   3:   ldc #3; //String Hello World!
+   5:   invokevirtual   #4; //Method java/io/PrintStream.println:(Ljava/lang/String;)V
+   8:   return
+
+}
+</code></pre>
+
+<hr />
+
+<h3 id="exercise2:hellowaynesworld">Exercise 2: Hello Wayne&#8217;s World</h3>
+
+<h4 id="hello.java">Hello.java</h4>
+
+<pre><code>public class Hello {
+    static String wayne = "Hello Wayne";
+    public static void main (String[] args) {
+        System.out.println(wayne);
+    }
+}
+</code></pre>
+
+<h4 id="javaphello">javap Hello</h4>
+
+<pre><code>Compiled from "Hello.java"
+public class Hello extends java.lang.Object{
+    static java.lang.String wayne;
+    public Hello();
+    public static void main(java.lang.String[]);
+    static {};
+}
+</code></pre>
+
+<h4 id="javap-chello">javap -c Hello</h4>
+
+<pre><code>Compiled from "Hello.java"
+public class Hello extends java.lang.Object{
+static java.lang.String wayne;
+
+public Hello();
+  Code:
+   0:   aload_0
+   1:   invokespecial   #1; //Method java/lang/Object."&lt;init&gt;":()V
+   4:   return
+
+public static void main(java.lang.String[]);
+  Code:
+   0:   getstatic   #2; //Field java/lang/System.out:Ljava/io/PrintStream;
+   3:   getstatic   #3; //Field wayne:Ljava/lang/String;
+   6:   invokevirtual   #4; //Method java/io/PrintStream.println:(Ljava/lang/String;)V
+   9:   return
+
+static {};
+  Code:
+   0:   ldc #5; //String Hello Wayne
+   2:   putstatic   #3; //Field wayne:Ljava/lang/String;
+   5:   return
+
+}
+</code></pre>
+
+<h4 id="omittingthestaticdeclarationforthewaynefield">Omitting the static declaration for the <code>wayne</code> field</h4>
+
+<pre><code>public class Hello {
+    String wayne = "Hello Wayne";
+    public static void main (String[] args) {
+        System.out.println(wayne);
+    }
+}
+</code></pre>
+
+<p>Gives the following error:</p>
+
+<pre><code>Hello.java:4: non-static variable wayne cannot be referenced from a static context
+        System.out.println(wayne);
+                           ^
+1 error
+</code></pre>
+
+<p>Works if I do this</p>
+
+<pre><code>public class Hello {
+    public static void main (String[] args) {
+        String wayne = "Hello Wayne";
+        System.out.println(wayne);
+    }
+}
+</code></pre>
+
+<h3 id="exercise3:minimumelementinanarray">Exercise 3: Minimum Element in an Array</h3>
+
+<p>I&#8217;ve implemented a boring iterative solution, as well as one that uses the <code>java.util.*</code> package to sort the array and return the first element.</p>
+
+<pre><code>import java.util.*;
+
+class MinimiseUtils {
+
+    /**
+     * Minimum of two integers.
+     * @param i first of two integers
+     * @param j second of two integers
+     * @return minimum of i and j
+     */
+    static int min2(int i, int j) {
+        return i &lt; j ? i : j;
+    }
+
+    static int min3(int i, int j, int k) {
+        int temp = min2(j, k);
+        int result = min2(i, temp);
+        return result;
+    }
+
+    static int min(int[] data) {
+        return min(data, 0, data.length - 1);
+    }
+
+//  Cheating Version of array minimum computation
+/*
+    private static int min(int[] data, int start, int end) {
+        Arrays.sort(data);
+        return data[0]; 
+    }
+*/
+
+//  Iterative Version of array minimum computation
+    private static int min(int[] data, int start, int end) {
+        int min = data[start];
+        for (int i = start ; i &lt;= end ; i++) {
+            for (int j = i + 1 ; j &lt;= end ; j++) {
+                if (min &gt; min2( data[i], data[j] )) {
+                    min = min2( data[i], data[j] );
+                }
+            }
+        }
+        return min;
+    }
+
+//  Recursive Version of array minimum computation
+/*
+    private static int min(int[] data, int start, int end) {
+        return start == end ?
+                data[start] : // There is only one element
+                start &gt; end ?
+                    Integer.MAX_VALUE : // Return a massive value I guess to show that there the min is doesn't really exist in a bizarre array where start &gt; end
+                    min2(data[start], min(data, start + 1, end)); // Find the min recursively
+    }
+*/
+
+    public static void main(String[] args) {
+        int i = 99;
+        int j = 55;
+        int k = 11;
+        System.out.print("Minimum of " + i + ", " + j + ", " + k + " is ");
+        System.out.println(min3(i, j, k));
+
+        int[] data = {45, 23, 65, 24, 36, 63, 62, 15};
+        System.out.println("Minimum of test data array is " + min(data));
+    }
+}
+</code></pre>
+
+<h3 id="challenge">Challenge</h3>
+
+<h4 id="implementation">Implementation</h4>
+
+<p>Computing factorials recursively (perhaps not so appropriate for large n), using <code>int</code>, <code>double</code> and <code>BigInteger</code> declarations.</p>
+
+<pre><code>import java.math.BigInteger;
+
+public class Factorial {
+
+    static int factorial_int ( int n ) {
+        return n &lt; 2 ? 1 : n*factorial_int(n-1);
+    }
+
+    static double factorial_double ( int n ) {
+        return n &lt; 2 ? 1 : n*factorial_double(n-1);
+    }
+
+    static BigInteger factorial_bigInteger ( int n ) {
+        return n &lt; 2 ? BigInteger.ONE : BigInteger.valueOf(n).multiply(factorial_bigInteger(n-1));
+    }
+
+    public static void main (String[] args) {
+        int n = Integer.parseInt(args[0]);
+        System.out.println(factorial_int(n));
+        System.out.println(factorial_double(n));
+        System.out.println(factorial_bigInteger(n));
+/*
+        for (int i = 1 ; i &lt;= Integer.parseInt(args[0]) ; i++) {
+            System.out.println(i+"!=");
+            System.out.println(factorial_int(i)+" (Integer)");
+            System.out.println(factorial_double(i)+" (Double)");            
+            System.out.println(factorial_bigInteger(i)+" (BigInteger)");            
+        }
+*/
+    }
+}
+</code></pre>
+
+<h4 id="testing">Testing</h4>
+
+<ul>
+<li><p><strong>How do you know what code is OK?</strong></p>
+
+<p>Not entirely sure what this means.</p></li>
+<li><p><strong>How do you know what 60! is?</strong></p>
+
+<p>By inspection. <em>Just kidding.</em>  </p>
+
+<p>We can compute this in well-tested mathematical computing software such as Matlab or Maple. Or we can work out the correct answer by hand. I prefer the former.</p></li>
+<li><p><strong>How do you know the answer is correct? Exactly?</strong></p>
+
+<p>To get a rough idea of the accuracy of the result, we can apply a special case of De Polignac&#8217;s formula to see that the number of trailing zero is correct. But knowing is the answer is <strong>exactly</strong> correct might be more difficult. </p></li>
+</ul>
+</body>
+</html>
