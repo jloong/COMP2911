@@ -24,6 +24,8 @@ public class NanoTimer implements Timer
 			state = State.RUNNING;
 			elapsed = new NanoInterval(0);
 			start_timestamp = currentTime();
+		} else if (state == State.RUNNING) {
+			elapsed = new NanoInterval(0);
 		}
 	}
 
