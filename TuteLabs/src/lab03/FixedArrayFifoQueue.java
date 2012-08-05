@@ -24,6 +24,30 @@ public class FixedArrayFifoQueue extends AbstractQueue implements FifoQueue
     {
         super (capacity);
     }
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected void unsafeAdd(Object x) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected Object unsafeGet() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Object unsafeRemove() {
+		// TODO Auto-generated method stub
+		return null;
+	}
     
     // TODO implement inherited methods here
     
