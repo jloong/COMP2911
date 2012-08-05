@@ -7,38 +7,77 @@ import org.junit.Test;
 
 public abstract class QueueTest {
 
+	protected Queue queue;
+
 	@Before
 	public void setUp() throws Exception {
 	}
+	
+	Object	item1	= "apple";
+	Object	item2	= "orange";
+	Object	item3	= "banana";
 
 	@Test
 	public void testAdd() {
-		fail("Not yet implemented");
+		queue.add(item1);
+		assertEquals ("last item added was item1", item1, queue.get ());
 	}
 
 	@Test
 	public void testGet() {
-		fail("Not yet implemented");
+		queue.add(item2);
+		assertEquals ("last item is item2", item2, queue.get ());
 	}
 
 	@Test
 	public void testRemove() {
-		fail("Not yet implemented");
+		queue.add(item1);
+		queue.add(item2);
+		assertEquals ("remove last item which is item2", item2, queue.remove ());
+		assertEquals ("queue now only has item1", item1, queue.get ());
+		assertEquals ("so queue only has one item", 1, queue.size ());
 	}
 
 	@Test
 	public void testSize() {
-		fail("Not yet implemented");
+		queue.add(item1);
+		queue.add(item2);
+		assertEquals ("queue has 2 items", 2, queue.size ());
 	}
 
 	@Test
 	public void testIsEmpty() {
-		fail("Not yet implemented");
+		assertTrue ("Queue is empty", queue.isEmpty());
+		queue.add (item1);
+		assertFalse ("Queue is no longer empty", queue.isEmpty());
 	}
 
 	@Test
 	public void testIsFull() {
-		fail("Not yet implemented");
+		assertFalse ("Queue is not yet full", queue.isFull());
+/*		for (int i = 0 ; i < Integer.MAX_VALUE ; i++) {
+			queue.add(item1);
+		}
+		assertTrue ("Queue is now full", queue.isFull());
+*/
+	}
+	
+	@Test
+	public void testSetUp ()
+	{
+		assertNotNull (queue);
+	}
+	
+	@Test
+	public void testInitSize ()
+	{
+		assertEquals ("Empty queue", 0, queue.size ());
+	}
+	
+	@Test
+	public void testAddSize() {
+		queue.add(item1);
+		assertEquals ("One item added", 1, queue.size ());
 	}
 
 }
