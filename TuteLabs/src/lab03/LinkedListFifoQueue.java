@@ -18,12 +18,12 @@ public class LinkedListFifoQueue extends AbstractQueue implements FifoQueue
 
 	@Override
 	protected Object unsafeGet() {
-		return elements.getLast();
+		return elements.getFirst();
 	}
 
 	@Override
 	protected Object unsafeRemove() {
-		return elements.removeLast();
+		return elements.remove();
 	}
     
 }

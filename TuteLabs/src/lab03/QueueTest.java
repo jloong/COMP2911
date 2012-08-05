@@ -10,13 +10,18 @@ public abstract class QueueTest {
 	protected Queue queue;
 
 	@Before
-	public void setUp() throws Exception {
-	}
+	public abstract void setUp() throws Exception;
 	
 	Object	item1	= "apple";
 	Object	item2	= "orange";
 	Object	item3	= "banana";
 
+	@Test
+	public void testSetUp ()
+	{
+		assertNotNull (queue);
+	}
+	
 	@Test
 	public void testAdd() {
 		queue.add(item1);
@@ -33,8 +38,8 @@ public abstract class QueueTest {
 	public void testRemove() {
 		queue.add(item1);
 		queue.add(item2);
-		assertEquals ("remove last item which is item2", item2, queue.remove ());
-		assertEquals ("queue now only has item1", item1, queue.get ());
+		assertEquals ("remove last item which is item1", item1, queue.remove ());
+		assertEquals ("queue now only has item2", item2, queue.get ());
 		assertEquals ("so queue only has one item", 1, queue.size ());
 	}
 
@@ -60,12 +65,6 @@ public abstract class QueueTest {
 		}
 		assertTrue ("Queue is now full", queue.isFull());
 */
-	}
-	
-	@Test
-	public void testSetUp ()
-	{
-		assertNotNull (queue);
 	}
 	
 	@Test

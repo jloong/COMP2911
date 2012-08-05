@@ -22,38 +22,32 @@ public class FixedArrayFifoQueue extends AbstractQueue implements FifoQueue
     
     public FixedArrayFifoQueue (int capacity)
     {
-        super (capacity);
+    	super (capacity);
     }
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return size;
 	}
 
 	@Override
 	protected void unsafeAdd(Object x) {
-		// TODO Auto-generated method stub
-		
+		data[indexForAdd++] = x;
+		size++;
 	}
 
 	@Override
 	protected Object unsafeGet() {
-		// TODO Auto-generated method stub
-		return null;
+		return data[indexForRemove];
 	}
 
 	@Override
 	protected Object unsafeRemove() {
-		// TODO Auto-generated method stub
-		return null;
+		Object temp = data[indexForRemove];
+		data[indexForRemove] = null; // I supposed setting it to null is a sensible way to delete?
+		indexForRemove++;
+		size--;
+		return temp;
 	}
     
-    // TODO implement inherited methods here
-    
-    // Use eclipse commands to generate code templates:
-    // Either
-    //   Source > Override/Implement Methods ...
-    // or
-    //   use QuickFix hint from eclipse at the compile error for the class header
 }
