@@ -8,34 +8,22 @@ public class LinkedListFifoQueue extends AbstractQueue implements FifoQueue
 
 	@Override
 	public int size() {
-		// TODO Auto-generated method stub
-		return 0;
+		return elements.size();
 	}
 
 	@Override
 	protected void unsafeAdd(Object x) {
-		// TODO Auto-generated method stub
-		
+		elements.addLast(x);
 	}
 
 	@Override
 	protected Object unsafeGet() {
-		// TODO Auto-generated method stub
-		return null;
+		return elements.getLast();
 	}
 
 	@Override
 	protected Object unsafeRemove() {
-		// TODO Auto-generated method stub
-		return null;
+		return elements.removeLast();
 	}
     
-    // TODO implement inherited methods here
-
-    
-    // Use eclipse commands to generate code templates:
-    // Either
-    //   Source > Override/Implement Methods ...
-    // or
-    //   use QuickFix hint from eclipse at the compile error for the class header
 }
