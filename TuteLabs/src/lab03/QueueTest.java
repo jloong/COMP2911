@@ -60,11 +60,11 @@ public abstract class QueueTest {
 	@Test
 	public void testIsFull() {
 		assertFalse ("Queue is not yet full", queue.isFull());
-/*		for (int i = 0 ; i < Integer.MAX_VALUE ; i++) {
+		/*for (int i = 0 ; i < Integer.MAX_VALUE ; i++) {
 			queue.add(item1);
 		}
 		assertTrue ("Queue is now full", queue.isFull());
-*/
+		*/
 	}
 	
 	@Test
