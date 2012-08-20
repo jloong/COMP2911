@@ -61,8 +61,7 @@ public class TennisFactory
     
     public Game makeSinglesGame (Player server)
     {
-        // TODO
-        return null;
+    	return new SinglesGame(server, 4, 2);
     }
     
     public Game makeTieBreakGame (Player firstServer)
